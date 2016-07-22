@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fan.dao.SchoolDao">
+<select id="findAllSchool" resultMap="SchoolReusltMap">
+        SELECT 
+			s.schoolid,s.schoolname,a.name 
+		FROM 
+			`pw_school` s,`pw_areas` a 
+		WHERE 
+			s.areaid = a.areaid
+		LIMIT 0,30
+</select>
+
+<resultMap id="SchoolReusltMap" type="com.fan.entity.School">
+	<id property="schoolId" column="schoolid"/>
+	<result property="schoolName" column="schoolname"/>
+	<association property="areas" column="areaid" javaType="com.fan.entity.Areas">
+		<result property="name" column="name"/>
+	</association>
+	</resultMap>
+
+</mapper>
